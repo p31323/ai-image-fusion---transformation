@@ -35,7 +35,7 @@ export const generateImage = async (
         image2: image2Payload,
     });
 
-    const response = await fetch('/api/generate', {
+    const response = await fetch('/.netlify/functions/generate', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
