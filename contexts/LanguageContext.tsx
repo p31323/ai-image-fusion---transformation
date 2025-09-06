@@ -47,8 +47,8 @@ const translations: Record<Language, Translations> = {
       "downloadButton": "Download",
       "useAsSourceButton": "Use as Source",
       "errorAllInputs": "Please provide all required inputs for the selected mode.",
-      // FIX: Updated error message to reference API_KEY instead of VITE_API_KEY and made it more generic.
-      "errorApiKey": "API_KEY environment variable not set. Please add it in your project settings.",
+      // FIX: Updated error message to be more generic and not expose implementation details.
+      "errorApiKey": "API key is not configured. Please contact the administrator.",
       "errorGenerationFailed": "Image generation failed. Model response: {response}",
       "errorNoImageGenerated": "No image was generated. The model may have refused the prompt without a text reason.",
       "uploadAction": "Click to upload",
@@ -91,8 +91,8 @@ const translations: Record<Language, Translations> = {
       "downloadButton": "下載",
       "useAsSourceButton": "作為來源圖片",
       "errorAllInputs": "請為所選模式提供所有必要的輸入。",
-      // FIX: Updated error message to reference API_KEY instead of VITE_API_KEY and made it more generic.
-      "errorApiKey": "API_KEY 環境變數未設定。請在您的專案設定中新增它。",
+      // FIX: Updated error message to be more generic and not expose implementation details.
+      "errorApiKey": "API 金鑰未設定。請聯絡管理員。",
       "errorGenerationFailed": "圖片生成失敗。模型回應：{response}",
       "errorNoImageGenerated": "未能生成圖片。模型可能因提示詞原因拒絕了請求，且未提供文字說明。",
       "uploadAction": "點擊上傳",
@@ -135,8 +135,8 @@ const translations: Record<Language, Translations> = {
       "downloadButton": "ダウンロード",
       "useAsSourceButton": "ソース画像として使用",
       "errorAllInputs": "選択したモードに必要なすべての入力を提供してください。",
-      // FIX: Updated error message to reference API_KEY instead of VITE_API_KEY and made it more generic.
-      "errorApiKey": "API_KEY環境変数が設定されていません。プロジェクト設定で追加してください。",
+      // FIX: Updated error message to be more generic and not expose implementation details.
+      "errorApiKey": "APIキーが設定されていません。管理者に連絡してください。",
       "errorGenerationFailed": "画像生成に失敗しました。モデルの応答：{response}",
       "errorNoImageGenerated": "画像は生成されませんでした。モデルがプロンプトを拒否した可能性があります。",
       "uploadAction": "クリックしてアップロード",
