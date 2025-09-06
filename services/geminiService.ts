@@ -26,10 +26,15 @@ export const generateImage = async (
     image1: File,
     image2?: File | null
 ): Promise<string> => {
-    // FIX: Per coding guidelines, the API key must be obtained from `process.env.API_KEY`.
-    // This also resolves the TypeScript error on `import.meta.env`.
-    // The manual key check is removed as its presence is assumed.
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
+    // FIX: The API key must be obtained from process.env.API_KEY as per the guidelines, which also resolves the TypeScript error with import.meta.env.
+    const apiKey = process.env.API_KEY;
+
+    if (!apiKey) {
+        // This error key matches the one in LanguageContext to show a user-friendly message.
+        throw new Error('errorApiKey');
+    }
+    
+    const ai = new GoogleGenAI({ apiKey });
 
     const parts: Part[] = [];
 
