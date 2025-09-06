@@ -1,24 +1,20 @@
-import { GoogleGenAI, Modality, Part } from "@google/genai";
 
-const fileToGenerativePart = async (file: File): Promise<Part> => {
-  const base64EncodedDataPromise = new Promise<string>((resolve) => {
+const fileToBase64 = async (file: File): Promise<{ data: string; mimeType: string; }> => {
+  return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onloadend = () => {
         if (typeof reader.result === 'string') {
-            resolve(reader.result.split(',')[1]);
+            resolve({
+                data: reader.result.split(',')[1],
+                mimeType: file.type
+            });
         } else {
-            resolve('');
+            reject(new Error("Failed to read file as data URL."));
         }
     };
+    reader.onerror = reject;
     reader.readAsDataURL(file);
   });
-  
-  return {
-    inlineData: {
-      data: await base64EncodedDataPromise,
-      mimeType: file.type,
-    },
-  };
 };
 
 export const generateImage = async (
@@ -26,48 +22,45 @@ export const generateImage = async (
     image1: File,
     image2?: File | null
 ): Promise<string> => {
-    // FIX: Use process.env.API_KEY as required by the coding guidelines, instead of Vite-specific import.meta.env.
-    const apiKey = process.env.API_KEY;
-
-    if (!apiKey) {
-        // This error key matches the one in LanguageContext to show a user-friendly message.
-        throw new Error('errorApiKey');
-    }
     
-    const ai = new GoogleGenAI({ apiKey });
-
-    const parts: Part[] = [];
-
-    const imagePart1 = await fileToGenerativePart(image1);
-    parts.push(imagePart1);
-
-    if (image2) {
-        const imagePart2 = await fileToGenerativePart(image2);
-        parts.push(imagePart2);
-    }
+    // The Gemini API call is now proxied through our serverless function
+    // to protect the API key.
     
-    parts.push({ text: prompt });
-
-    const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash-image-preview',
-        contents: {
-            parts: parts,
-        },
-        config: {
-            responseModalities: [Modality.IMAGE, Modality.TEXT],
-        },
+    const image1Payload = await fileToBase64(image1);
+    const image2Payload = image2 ? await fileToBase64(image2) : null;
+    
+    const body = JSON.stringify({
+        prompt,
+        image1: image1Payload,
+        image2: image2Payload,
     });
 
-    for (const part of response.candidates?.[0]?.content?.parts || []) {
-        if (part.inlineData && part.inlineData.data) {
-            const base64ImageBytes: string = part.inlineData.data;
-            return `data:${part.inlineData.mimeType};base64,${base64ImageBytes}`;
-        }
-    }
+    const response = await fetch('/api/generate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: body,
+    });
 
-    const textResponse = response.text;
-    if (textResponse) {
-        throw new Error(`errorGenerationFailed:${textResponse}`);
+    const result = await response.json();
+
+    if (!response.ok) {
+        if (result.error === "API_KEY_MISSING") {
+            throw new Error('errorApiKey');
+        }
+        if (result.error && result.error.startsWith('Image generation failed')) {
+            const modelResponse = result.error.split(':').slice(1).join(':').trim();
+            throw new Error(`errorGenerationFailed:${modelResponse || 'Unknown model error'}`);
+        }
+        if (result.error === 'No image was generated.') {
+            throw new Error('errorNoImageGenerated');
+        }
+        throw new Error(result.error || 'An unknown error occurred on the server.');
+    }
+    
+    if (result.data) {
+        return result.data;
     }
 
     throw new Error("errorNoImageGenerated");
