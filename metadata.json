@@ -1,0 +1,5 @@
+{
+  "name": "AI Image Fusion & Transformation",
+  "description": "An AI-powered image synthesis tool. Merge two photos or edit a single photo using text prompts, all with a beautiful starry sky interface.",
+  "requestFramePermissions": []
+}
