@@ -36,10 +36,9 @@
   "downloadButton": "Download",
   "useAsSourceButton": "Use as Source",
   "errorAllInputs": "Please provide all required inputs for the selected mode.",
-  "errorApiKey": "API_KEY environment variable not set. Please ensure it is configured correctly on the server.",
+  "errorApiKey": "VITE_API_KEY environment variable not set. For security, your build tool requires environment variables to be prefixed with 'VITE_'. Please update this in your project settings.",
   "errorGenerationFailed": "Image generation failed. Model response: {response}",
   "errorNoImageGenerated": "No image was generated. The model may have refused the prompt without a text reason.",
-  "errorServer": "A server error occurred (Status: {response}). The API endpoint might be missing or misconfigured.",
   "uploadAction": "Click to upload",
   "removeImageAriaLabel": "Remove image"
 }

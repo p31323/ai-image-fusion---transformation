@@ -1,15 +1,29 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "target": "ES2022",
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "module": "ESNext",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "skipLibCheck": true,
+    "types": [
+      "node"
+    ],
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "allowJs": true,
     "jsx": "react-jsx",
-    "rootDir": "./",
-    "isolatedModules": true
-  },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "dist"]
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  }
 }
