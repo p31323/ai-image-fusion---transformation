@@ -36,7 +36,7 @@
   "downloadButton": "Download",
   "useAsSourceButton": "Use as Source",
   "errorAllInputs": "Please provide all required inputs for the selected mode.",
-  "errorApiKey": "VITE_API_KEY environment variable not set in Vercel. Please add it in your project settings.",
+  "errorApiKey": "API_KEY environment variable not set. Please add it to your project settings.",
   "errorGenerationFailed": "Image generation failed. Model response: {response}",
   "errorNoImageGenerated": "No image was generated. The model may have refused the prompt without a text reason.",
   "uploadAction": "Click to upload",

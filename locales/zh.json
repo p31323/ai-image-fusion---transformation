@@ -36,7 +36,7 @@
   "downloadButton": "下載",
   "useAsSourceButton": "作為來源圖片",
   "errorAllInputs": "請為所選模式提供所有必要的輸入。",
-  "errorApiKey": "VITE_API_KEY 環境變數未在 Vercel 中設定。請在您的專案設定中新增它。",
+  "errorApiKey": "API_KEY 環境變數未設定。請在您的專案設定中新增它。",
   "errorGenerationFailed": "圖片生成失敗。模型回應：{response}",
   "errorNoImageGenerated": "未能生成圖片。模型可能因提示詞原因拒絕了請求，且未提供文字說明。",
   "uploadAction": "點擊上傳",

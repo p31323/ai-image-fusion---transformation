@@ -26,7 +26,7 @@ export const generateImage = async (
     image1: File,
     image2?: File | null
 ): Promise<string> => {
-    // FIX: Per Gemini API guidelines, API key must be retrieved from process.env.API_KEY.
+    // Fix: Use process.env.API_KEY as per the guidelines.
     const apiKey = process.env.API_KEY;
 
     if (!apiKey) {
