@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "esbuild index.tsx --bundle --outfile=dist/index.js --jsx=automatic --format=esm --external:react --external:react-dom/client --external:react/jsx-runtime && cp index.html dist/"
+    "build": "esbuild index.tsx --bundle --outfile=dist/index.js --jsx=automatic --format=esm --external:react --external:react-dom/client --external:react/jsx-runtime && cp index.html dist/ && cp -r locales dist/"
   },
   "dependencies": {
     "@google/genai": "^1.16.0"

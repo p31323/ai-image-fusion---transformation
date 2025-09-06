@@ -36,9 +36,10 @@
   "downloadButton": "ダウンロード",
   "useAsSourceButton": "ソース画像として使用",
   "errorAllInputs": "選択したモードに必要なすべての入力を提供してください。",
-  "errorApiKey": "VITE_API_KEY 環境変数が設定されていません。セキュリティのため、ビルドツールは環境変数に 'VITE_' というプレフィックスを付ける必要があります。プロジェクト設定で更新してください。",
+  "errorApiKey": "API_KEY 環境変数が設定されていません。サーバーで正しく設定されていることを確認してください。",
   "errorGenerationFailed": "画像生成に失敗しました。モデルの応答：{response}",
   "errorNoImageGenerated": "画像は生成されませんでした。モデルがプロンプトを拒否した可能性があります。",
+  "errorServer": "サーバーエラーが発生しました (ステータス: {response})。APIエンドポイントが見つからないか、設定が間違っている可能性があります。",
   "uploadAction": "クリックしてアップロード",
   "removeImageAriaLabel": "画像を削除"
 }

@@ -36,9 +36,10 @@
   "downloadButton": "下載",
   "useAsSourceButton": "作為來源圖片",
   "errorAllInputs": "請為所選模式提供所有必要的輸入。",
-  "errorApiKey": "VITE_API_KEY 環境變數未設定。出於安全考量，您的建置工具要求環境變數必須以 'VITE_' 為前綴。請在您的專案設定中更新它。",
+  "errorApiKey": "API_KEY 環境變數未設定。請確保它已在伺服器上正確設定。",
   "errorGenerationFailed": "圖片生成失敗。模型回應：{response}",
   "errorNoImageGenerated": "未能生成圖片。模型可能因提示詞原因拒絕了請求，且未提供文字說明。",
+  "errorServer": "發生伺服器錯誤 (狀態碼: {response})。API 端點可能遺失或設定錯誤。",
   "uploadAction": "點擊上傳",
   "removeImageAriaLabel": "移除圖片"
 }

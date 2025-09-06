@@ -1,4 +1,5 @@
 
+
 const fileToBase64 = async (file: File): Promise<{ data: string; mimeType: string; }> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -23,9 +24,6 @@ export const generateImage = async (
     image2?: File | null
 ): Promise<string> => {
     
-    // The Gemini API call is now proxied through our serverless function
-    // to protect the API key.
-    
     const image1Payload = await fileToBase64(image1);
     const image2Payload = image2 ? await fileToBase64(image2) : null;
     
@@ -43,21 +41,32 @@ export const generateImage = async (
         body: body,
     });
 
-    const result = await response.json();
-
     if (!response.ok) {
-        if (result.error === "API_KEY_MISSING") {
+        const errorText = await response.text();
+        let errorJson;
+        try {
+            errorJson = JSON.parse(errorText);
+        } catch (e) {
+            console.error("Non-JSON error response from server:", errorText);
+            throw new Error(`errorServer:${response.status}`);
+        }
+        
+        const errorMessage = errorJson.error || 'An unknown error occurred on the server.';
+        
+        if (errorMessage === "API_KEY_MISSING") {
             throw new Error('errorApiKey');
         }
-        if (result.error && result.error.startsWith('Image generation failed')) {
-            const modelResponse = result.error.split(':').slice(1).join(':').trim();
+        if (errorMessage.startsWith('Image generation failed')) {
+            const modelResponse = errorMessage.split(':').slice(1).join(':').trim();
             throw new Error(`errorGenerationFailed:${modelResponse || 'Unknown model error'}`);
         }
-        if (result.error === 'No image was generated.') {
+        if (errorMessage === 'No image was generated.') {
             throw new Error('errorNoImageGenerated');
         }
-        throw new Error(result.error || 'An unknown error occurred on the server.');
+        throw new Error(errorMessage);
     }
+    
+    const result = await response.json();
     
     if (result.data) {
         return result.data;
