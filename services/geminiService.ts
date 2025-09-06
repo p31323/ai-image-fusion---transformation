@@ -26,7 +26,7 @@ export const generateImage = async (
     image1: File,
     image2?: File | null
 ): Promise<string> => {
-    // Fix: Use process.env.API_KEY as per the guidelines.
+    // FIX: Use process.env.API_KEY as required by the coding guidelines, instead of Vite-specific import.meta.env.
     const apiKey = process.env.API_KEY;
 
     if (!apiKey) {
