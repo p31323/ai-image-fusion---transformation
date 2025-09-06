@@ -26,7 +26,7 @@ export const generateImage = async (
     image1: File,
     image2?: File | null
 ): Promise<string> => {
-    // FIX: The API key must be obtained from process.env.API_KEY as per the guidelines, which also resolves the TypeScript error with import.meta.env.
+    // FIX: Per Gemini API guidelines, API key must be retrieved from process.env.API_KEY.
     const apiKey = process.env.API_KEY;
 
     if (!apiKey) {
