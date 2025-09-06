@@ -36,7 +36,7 @@
   "downloadButton": "ダウンロード",
   "useAsSourceButton": "ソース画像として使用",
   "errorAllInputs": "選択したモードに必要なすべての入力を提供してください。",
-  "errorApiKey": "API_KEY 環境変数が設定されていません。",
+  "errorApiKey": "VercelでVITE_API_KEY環境変数が設定されていません。プロジェクト設定で追加してください。",
   "errorGenerationFailed": "画像生成に失敗しました。モデルの応答：{response}",
   "errorNoImageGenerated": "画像は生成されませんでした。モデルがプロンプトを拒否した可能性があります。",
   "uploadAction": "クリックしてアップロード",

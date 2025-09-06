@@ -26,10 +26,12 @@ export const generateImage = async (
     image1: File,
     image2?: File | null
 ): Promise<string> => {
-    if (!process.env.API_KEY) {
+    // FIX: Switched from import.meta.env.VITE_API_KEY to process.env.API_KEY to fix the error and align with guidelines.
+    const apiKey = process.env.API_KEY;
+    if (!apiKey) {
         throw new Error("errorApiKey");
     }
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const ai = new GoogleGenAI({ apiKey });
 
     const parts: Part[] = [];
 
